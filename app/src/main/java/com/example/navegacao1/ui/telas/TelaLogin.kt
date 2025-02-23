@@ -27,7 +27,7 @@ import kotlinx.coroutines.launch
 val usuarioDAO: UsuarioDAO = UsuarioDAO()
 
 @Composable
-fun TelaLogin(modifier: Modifier = Modifier, onSigninClick: () -> Unit ) {
+fun TelaLogin(modifier: Modifier = Modifier, onSigninClick: () -> Unit, onCadastrarClick: () -> Unit ) {
     val context = LocalContext.current
     var scope = rememberCoroutineScope()
 
@@ -51,6 +51,10 @@ fun TelaLogin(modifier: Modifier = Modifier, onSigninClick: () -> Unit ) {
             }
         }) {
             Text("Entrar")
+        }
+
+        Button(onClick = { onCadastrarClick() }) {
+            Text("Cadastrar")
         }
 
         mensagemErro?.let {

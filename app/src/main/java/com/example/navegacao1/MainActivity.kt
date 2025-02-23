@@ -18,6 +18,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.example.navegacao1.ui.telas.TelaCadastro
 import com.example.navegacao1.ui.telas.TelaLogin
 import com.example.navegacao1.ui.telas.TelaPrincipal
 import com.example.navegacao1.ui.theme.Navegacao1Theme
@@ -34,25 +35,35 @@ class MainActivity : ComponentActivity() {
                 Scaffold(
                     topBar = {
                         TopAppBar(
-                            title = { Text("Login") },
+                            title = { Text("App Firestore") },
                             Modifier.background(MaterialTheme.colorScheme.secondary)
                         )
                     },
                     modifier = Modifier.fillMaxSize()) { innerPadding ->
+
                     val navController = rememberNavController()
+
                     NavHost(navController = navController, startDestination = "login") {
                         composable("login") {
-                            TelaLogin(modifier = Modifier.padding(innerPadding), onSigninClick = {
-                                navController.navigate("principal")
-                            })
+                            TelaLogin(
+                                modifier = Modifier.padding(innerPadding),
+                                onSigninClick = { navController.navigate("principal") },
+                                onCadastrarClick = { navController.navigate("cadastro") }
+                            )
                         }
                         composable("principal") {
-                            TelaPrincipal(modifier = Modifier.padding(innerPadding), onLogoffClick = {
-                                navController.navigate("login")
-                            })
+                            TelaPrincipal(
+                                modifier = Modifier.padding(innerPadding),
+                                onLogoffClick = { navController.navigate("login") }
+                            )
+                        }
+                        composable("cadastro") {
+                            TelaCadastro(
+                                modifier = Modifier.padding(innerPadding),
+                                onCadastradoComSucesso = { navController.navigate("login") }
+                            )
                         }
                     }
-
                 }
             }
         }
@@ -61,13 +72,13 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(name: String, modifier: Modifier = Modifier) {
-//    TelaLogin()
+    //    TelaLogin()
 }
 
 @Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     Navegacao1Theme {
-//        TelaLogin()
+        //        TelaLogin()
     }
 }
